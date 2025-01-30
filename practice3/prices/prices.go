@@ -1,6 +1,7 @@
 package prices
 
 import (
+	"errors"
 	"fmt"
 
 	"example.com/tax-calculator/conversion"
@@ -34,13 +35,35 @@ func (job *TaxIncludedPricesJob) LoadData() error {
 }
 
 // function with receiver argument.
-func (job *TaxIncludedPricesJob) Process() error {
+// func (job *TaxIncludedPricesJob) Process() error {
+// 	err:= job.LoadData()
+// 	if err != nil {
+// 		return err
+// 	}
+
+// 	result := make(map[string]string) // make() creates empty map
+
+// 	for _, price := range job.InputPrices {
+// 		taxIncludedPrice := price * (1 + job.TaxRate)
+// 		result[fmt.Sprintf("%.2f", price)] = fmt.Sprintf("%.2f", taxIncludedPrice)
+// 	}
+
+// 	job.TaxIncludedPrices = result
+
+// 	return job.IOManager.WriteResult(job) // this already returns error
+// }
+
+// Process function as goroutine!
+func (job *TaxIncludedPricesJob) Process(doneChan chan bool, errorChan chan error) {
 	err:= job.LoadData()
+
+	// errorChan <- errors.New("test error case")
 	if err != nil {
-		return err
+		errorChan <- err
+		return // with this return the code below will not execute.
 	}
 
-	result := make(map[string]string) // make() creates empty map
+	result := make(map[string]string)
 
 	for _, price := range job.InputPrices {
 		taxIncludedPrice := price * (1 + job.TaxRate)
@@ -49,7 +72,9 @@ func (job *TaxIncludedPricesJob) Process() error {
 
 	job.TaxIncludedPrices = result
 
-	return job.IOManager.WriteResult(job) // this already returns error
+	// if function run as a goroutine, return value will be ignored.
+	job.IOManager.WriteResult(job)
+	doneChan <- true
 }
 
 // constructor
