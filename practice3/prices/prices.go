@@ -1,7 +1,6 @@
 package prices
 
 import (
-	"errors"
 	"fmt"
 
 	"example.com/tax-calculator/conversion"
@@ -55,7 +54,7 @@ func (job *TaxIncludedPricesJob) LoadData() error {
 
 // Process function as goroutine!
 func (job *TaxIncludedPricesJob) Process(doneChan chan bool, errorChan chan error) {
-	err:= job.LoadData()
+	err := job.LoadData()
 
 	// errorChan <- errors.New("test error case")
 	if err != nil {
