@@ -1,0 +1,10 @@
+POST http://localhost:8080/events
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3QyQGV4YW1wbGUuY29tIiwiZXhwIjoxNzM4MzQzOTg2LCJ1c2VySWQiOjJ9.jCGvMzb799RY_HjiHPlj_MVFNWR4lnF8QdafxR3TAcs
+
+{
+    "name": "Test event for update userid",
+    "description": "A test event update userid",
+    "location": "Stockholm",
+    "datetime" : "2025-02-16T16:48:54Z"
+}
