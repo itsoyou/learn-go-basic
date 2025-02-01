@@ -1,16 +1,19 @@
 # Learn Go Basics
 
+This is based on Udemy Course `Go - The Complete Guide`, lecture by Maximilian Schwarzmüller.
+
 ## Pointers
 
 variables that store value's address instead of the actual value.
 
 e.g.
-
+```
 age := 30
 
 in computer memory: value -> 32, address -> 0xc00138475
 
 agePointer := &age -> address -> 0xc00138475
+```
 
 Why do we need this?
 - avoid unnecessary value copies
@@ -27,20 +30,20 @@ Why do we need this?
 Group data together and also methods and functions
 defined by "type"
 
-'''
+```
 type Note struct {
 
 }
-'''
+```
 
 ## Interfaces
 
 Also use "type"
-'''
+```
 type saver interface {
 
 }
-'''
+```
 
 ## Concurrency
 
