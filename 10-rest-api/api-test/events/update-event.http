@@ -1,9 +1,11 @@
 PUT http://localhost:8080/events/1
 Content-Type: application/json
+Authorization: ...
 
 {
-    "Name": "Test event 2",
-    "Location": "Berlin",
+    "Name": "Test event for update auth (UPDATED)",
+    "Description": "A test event update auth",
+    "Location": "Seoul",
     "DateTime": "2025-02-16T16:48:54Z"
 }
 
